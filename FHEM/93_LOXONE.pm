@@ -6,6 +6,7 @@
 # 19.01.2017 - initial 
 # 03.03.2017 - add helper functions to send data via udp to Miniserver
 # 07.11.2017 - add motion function for ZWAVE
+# 28.12.2017 - add new options
 ###############################################
 
 package main;
