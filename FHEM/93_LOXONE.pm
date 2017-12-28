@@ -5,7 +5,11 @@
 # Changes
 # 19.01.2017 - initial 
 # 03.03.2017 - add helper functions to send data via udp to Miniserver
+<<<<<<< HEAD
 # 07.11.2017 - add motion function for ZWAVE
+=======
+#
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 ###############################################
 
 package main;
@@ -274,7 +278,10 @@ sub LOXONE_UDP($$)
 		return undef
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 #EnergyToLoxone
 sub 
 LOXONE_Energy($$$$)
@@ -290,6 +297,7 @@ LOXONE_Energy($$$$)
  return undef;
 }
 
+<<<<<<< HEAD
 #MotionToLoxone
 sub LOXONE_Motion($$$)
 {
@@ -323,6 +331,8 @@ sub percent2rgb($)
 
 
 
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 sub LOXONE_Kwl($$$$)
 {
  my ($miniserver, $device, $reading, $value) = @_;
@@ -348,6 +358,7 @@ sub LOXONE_Climate($$$$)
  return undef;
 }
 
+<<<<<<< HEAD
 #GENERICToLoxone
 sub LOXONE_Generic($$$)
 {
@@ -381,6 +392,8 @@ sub LOXONE_Aircond($$$)
  return undef;
 }
 
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 #Wetter
 sub LOXONE_Wetter($$$$)
 {
@@ -412,6 +425,7 @@ sub LOXONE_OnOff($$$)
  return undef;
 }
 
+<<<<<<< HEAD
 sub LOXONE_Sonoff_OnOff($$$$)
 {
  my ($miniserver, $device, $reading, $value) = @_;
@@ -428,6 +442,8 @@ sub LOXONE_Sonoff_OnOff($$$$)
  return undef;
 }
 
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 #OpenClosedToLoxone
 #device
 #1 state(0,1)
@@ -454,7 +470,10 @@ sub LOXONE_OpenClosed($$$)
  return undef;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 sub LOXONE_Heizung($$$$)
 {
  my ($event) = @_;
@@ -484,6 +503,7 @@ sub LOXONE_Heizung($$$$)
  return undef;
 }
 
+<<<<<<< HEAD
 #DenonToLoxone
 #1 power
 #2 input
@@ -614,6 +634,8 @@ sub DenonToLoxone($$$)
   LOXONE_UDP($miniserver , "$device: $power $input $volume $mute");
  return undef;
 }
+=======
+>>>>>>> bf09c46e06091fa8eda911640f91e795b7c80fee
 
 1;
 

@@ -1,5 +1,6 @@
 #!/bin/bash   
-rm controls_loxone2fhem.txt
+/bin/rm "controls_loxone2fhem.txt"
+
 find ./FHEM -type f \( ! -iname ".*" \) -print0 | while IFS= read -r -d '' f; 
   do
    echo "DEL ${f}" >> controls_loxone2fhem.txt
