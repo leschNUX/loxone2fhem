@@ -615,6 +615,58 @@ sub DenonToLoxone($$$)
  return undef;
 }
 
+
+sub WgetToLoxone($$$)
+{
+	my ($device, $reading, $value) = @_;
+	my $ret = "";
+	my $readingweekday = "";
+	my $reading = (split(":",$reading))[0];
+	if ($reading eq "myAbfallNowDatumToLoxone"){
+		$readingweekday=ReadingsVal("$device","myAbfallNowWochentagToLoxone","-1");
+		$readingweekday .= "%20";
+		$readingweekday .= $value;
+		$value = $readingweekday;
+		}
+	if ($reading eq "myAbfallNextDatumToLoxone"){
+		$readingweekday=ReadingsVal("$device","myAbfallNextWochentagToLoxone","-1");
+		$readingweekday .= "%20";
+		$readingweekday .= $value;
+		$value = $readingweekday;
+	}
+	
+	$ret .=  system("wget -q -O /dev/null 'http://vitali:130784\@loxone.fritz.box/dev/sps/io/$reading/$value'");
+	$ret =~ s,[r]*,,g;
+	Log 4, "LOXONE_AbfallKalender: device: $device reading: $reading value: $value";
+}
+
+sub WgetToLoxoneTraffic($$$)
+{
+	my ($device, $reading, $value) = @_;
+	my $ret = "";
+	my $readingtrafficdelay = "";
+	my $readingtrafficreturn = "";
+	my $reading = (split(":",$reading))[0];
+	if ($reading eq "delay_min"){
+		$readingtrafficdelay=ReadingsVal("$device","duration_in_trafficToLoxone","-1");
+		$readingtrafficdelay .= "%20delay%20";
+		$readingtrafficdelay .= ReadingsVal("$device","delay_min","-1");
+		$value = $readingtrafficdelay;
+		}
+	if ($reading eq "return_delay_min"){
+		$readingtrafficreturn=ReadingsVal("$device","return_duration_in_trafficToLoxone","-1");
+		$readingtrafficreturn .= "%20delay%20";
+		$readingtrafficreturn .= ReadingsVal("$device","return_delay_min","-1");
+		$value = $readingtrafficreturn;
+		}
+	
+	$ret .=  system("wget -q -O /dev/null 'http://vitali:130784\@loxone.fritz.box/dev/sps/io/$reading/$value'");
+	$ret =~ s,[r]*,,g;
+	Log 4, "LOXONE_MapsTraffic: device: $device reading: $reading value: $value";
+}
+
+
+
 1;
 
 =pod
