@@ -454,6 +454,24 @@ sub LOXONE_OpenClosed($$$)
  return undef;
 }
 
+sub LOXONE_1WReedContact($$$$)
+{
+ my ($miniserver, $device, $reading, $value) = @_;
+ my $state="";
+ if ($value eq "closed" || $value eq "Closed") {
+	$state = "0";
+ }
+ if ($value eq "open" || $value eq "Open") {
+	$state = "1";
+ }
+ # Log 5, "LOXONE OpenClosed device: $device state: $state alive: $alive battery: $battery sabotage: $sabotage";
+ # Log 3, "LOXONE_Heizung miniserver: $miniserver device: $device reading: $reading value: $value";
+ Log 4, "LOXONE 1WReedContact miniserver: $miniserver device: $device reading: $reading state: $state";
+ $device.="_";
+ LOXONE_UDP($miniserver, "$device$reading $state");
+ return undef;
+}
+
 
 sub LOXONE_Heizung($$$$)
 {
