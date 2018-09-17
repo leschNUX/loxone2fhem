@@ -442,16 +442,37 @@ sub LOXONE_OpenClosed($$$)
  my $reading="state";
  my $state="";
  if ($value eq "closed" || $value eq "Closed") {
-	$state = "0";
+	$state = "1";
  }
  if ($value eq "open" || $value eq "Open") {
-	$state = "1";
+	$state = "0";
+ }
+ my $alive = ReadingsVal("$device","alive","-1");
+ if ($alive eq "yes") {
+ $alive = "1";
+ }
+ if ($alive eq "no") {
+ $alive = "0";
+ }
+ my $battery = ReadingsVal("$device","battery","-1");
+ if ($battery eq "ok") {
+ $battery = "1";
+ }
+ if ($battery eq "low") {
+ $battery = "0";
+ }
+ my $sabotage = ReadingsVal("$device","sabotageError","-1");
+ if ($sabotage eq "on") {
+ $sabotage = "1";
+ }
+ if ($sabotage eq "off") {
+ $sabotage = "0";
  }
  # Log 5, "LOXONE OpenClosed device: $device state: $state alive: $alive battery: $battery sabotage: $sabotage";
  # Log 3, "LOXONE_Heizung miniserver: $miniserver device: $device reading: $reading value: $value";
- Log 4, "LOXONE OpenClosed miniserver: $miniserver device: $device state: $state";
+ Log 4, "LOXONE OpenClosed miniserver: $miniserver device: $device state: $state alive: $alive battery: $battery sabotage: $sabotage";
  $device.="_";
- LOXONE_UDP($miniserver, "$device$reading: $state");
+ LOXONE_UDP($miniserver, "$device$reading: $state $alive $battery $sabotage");
  return undef;
 }
 
